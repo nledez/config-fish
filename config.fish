@@ -52,7 +52,9 @@ if test -d ~/Apps
 end
 
 # *env (Python, Ruby, Node, ...)
-source /usr/local/opt/asdf/asdf.fish
+test -f /usr/local/opt/asdf/asdf.fish
+	source /usr/local/opt/asdf/asdf.fish
+end
 
 #
 ### ALIAS
