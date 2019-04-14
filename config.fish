@@ -1,4 +1,3 @@
-#
 ### GLOBAL VARIABLES
 #
 
@@ -8,44 +7,52 @@ if [ -f $HOME/.config/fish/private.fish ]
     source $HOME/.config/fish/private.fish
 end
 
-# Colors for ls command
-set -gx LSCOLORS "Cxbgdxdxbxdgeghegeacad"
-
 # Keys binding
 bind "^X\\x7f" backward-kill-line
 
 # Editor
-set -x EDITOR vim
+if test -z $SSH_CONNECTION
+  set -x EDITOR nvim
+else
+  set -x EDITOR vim
+end
+set -x VIMCONFIG ~/.vim
+set -x VIMDATA ~/.vim
 set -x GIT_EDITOR $EDITOR
-set -x SUDO_EDITOR "rvim -u NONE"
+alias vi="$EDITOR"
+#set -x SUDO_EDITOR "rvim -u NONE"
+
+# Ssh agent
+if test -f ~/.keychain-load-fish
+	source ~/.keychain-load-fish
+end
 
 ## ENV
+set -x LANG en_US.UTF-8
+set -x LC_ALL C.UTF-8
+
+#Python
+if test -f ~/.pystartup
+	set -x PYTHONSTARTUP ~/.pystartup
+end
+
+# Ansible
+set -x ANSIBLE_NOCOWS 1
 
 # Go (if go exists)
 if type -q go
-    set -x GOPATH $HOME/Dev/go
+    set -x GOPATH $HOME/Devs/go
     set -x GOROOT /usr/local/opt/go/libexec
-    set -x PATH $GOPATH $PATH
-    set -x PATH $GOPATH/bin $PATH
+    set -x PATH $GOROOT/bin $GOPATH/bin $PATH
 end
 
-# Nodenv (if nodenv exists)
-if type -q nodenv
-    status --is-interactive; and source (nodenv init -|psub)
+# Update PATH
+if test -d ~/Apps
+	set -x PATH $PATH ~/Apps
 end
 
-# Rbenv (if rbenv exists)
-if type -q rbenv
-    status --is-interactive; and source (rbenv init -|psub)
-end
-
-# Pyenv (if pyenv exists) with virtualenv if pyenv-virtualenv plugin installed
-if type -q pyenv
-    status --is-interactive; and source (pyenv init -|psub)
-    if which pyenv-virtualenv-init > /dev/null
-        status --is-interactive; and source (pyenv virtualenv-init -|psub)
-    end
-end
+# *env (Python, Ruby, Node, ...)
+source /usr/local/opt/asdf/asdf.fish
 
 #
 ### ALIAS
