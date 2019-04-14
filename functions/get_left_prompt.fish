@@ -8,7 +8,7 @@ function get_left_prompt --description 'Get first line left prompt content'
     if set -q VIRTUAL_ENV; and set -q PYENV_VERSION
         printf '(%s)' $PYENV_VERSION
     end
-    printf ' %s ' (whoami)
+    printf ' %s@%s ' (whoami) (hostname -s)
     set_color normal
     set_color $cl_blue_1 -b $cl_blue_2
     printf ''

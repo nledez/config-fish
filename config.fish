@@ -56,6 +56,10 @@ if test -f /usr/local/opt/asdf/asdf.fish
 	source /usr/local/opt/asdf/asdf.fish
 end
 
+if test -f ~/.asdf/asdf.fish
+	source ~/.asdf/asdf.fish
+end
+
 #
 ### ALIAS
 #
