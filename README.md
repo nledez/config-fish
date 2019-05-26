@@ -32,10 +32,8 @@ The purpose of this configuration is for my personal usage only. I share it on G
 1.  Put all the config files and folders (this repository content) in your `~/.config/fish` folder. This latter should already be present if you've installed [`fish`](https://fishshell.com). You can also simply `git clone` inside your config folder (make sure it's empty before):
 
     ```
-    cd ~/.config/fish
-    # make sure the folder is empty (check with ls -la)
-    # then clone in the current folder
-    git clone https://github.com/CPatchane/config-fish.git .
+    mv ~/.config/fish /tmp/
+    git clone https://github.com/nledez/config-fish.git ~/.config/fish
     ```
 
 1.  If you don't need/use `nodenv`, `pyenv` or/and `rbenv`, don't worry, the config will check if these commands exist before initializing them. This is the same thing for the `golang` environment, it will check if the command `go` exist before initializing the related environment.
